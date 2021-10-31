@@ -9,8 +9,6 @@ P_TIMEZONE = pytz.timezone(config.TIMEZONE)
 TIMEZONE_COMMON_NAME = config.TIMEZONE_COMMON_NAME
 
 bot = telebot.TeleBot(config.TOKEN)
-bot.polling(none_stop=True)
-
 @bot.message_handler(commands=['start'])  
 def start_command(message):  
     bot.send_message(  
@@ -19,7 +17,7 @@ def start_command(message):
         'To get the exchange rates press /exchange.\n' +  
         'To get help press /help.'  
   )
-
+bot.polling(none_stop=True)
 @bot.message_handler(commands=['help'])  
 def help_command(message):  
     keyboard = telebot.types.InlineKeyboardMarkup()  
@@ -176,5 +174,5 @@ def get_iq_articles(exchanges):
 	        description='Convert ' + exc['base_ccy'] + ' -> ' + exc['ccy'],  
 	        thumb_height=1  
 	    )  
-        )   
+        )  
     return result                             
